@@ -26,7 +26,7 @@ OBJS=$(shell echo $(SOURCES) | sed s/.cc/.o/g)
 EXES=$(shell echo $(SOURCES) | sed s/.cc/.x/g)
 all:$(EXES)
 
-CC=icpc
+CC=/local/scratch/a/das160/intel/oneapi/compiler/latest/bin/icpx
 %.x:%.o $(NRMCL)
 	@echo $(LDFLAGS)
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)

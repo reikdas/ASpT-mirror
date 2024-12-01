@@ -154,10 +154,10 @@ inline int indexProcessCColI(int *index,
     const int IA[], const int JA[], const QValue A[],
     int* iJC, QValue* iC);
 #else
-inline int indexProcessCColI(int *restrict index,
+inline int indexProcessCColI(int *__restrict__ index,
     const int iBnnz, const int iJB[], const QValue iB[],
     const int IA[], const int JA[], const QValue A[],
-    int* restrict iJC, QValue* restrict iC) {
+    int* __restrict__ iJC, QValue* __restrict__ iC) {
 #endif
   if (iBnnz == 0) {
     return 0;

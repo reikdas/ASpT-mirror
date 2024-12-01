@@ -158,10 +158,10 @@ inline int indexProcessCRowI(int *index,
     const int IB[], const int JB[], const QValue B[],
     int* iJC, QValue* iC) {
 #else
-inline int indexProcessCRowI(int *restrict index,
+inline int indexProcessCRowI(int *__restrict__ index,
     const int iAnnz, const int iJA[], const QValue iA[],
     const int IB[], const int JB[], const QValue B[],
-    int* restrict iJC, QValue* restrict iC) {
+    int* __restrict__ iJC, QValue* __restrict__ iC) {
 #endif
   if (iAnnz == 0) {
     return 0;

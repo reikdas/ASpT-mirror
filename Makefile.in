@@ -1,16 +1,16 @@
-INTEL_PATH=/home/kunal/intel
-MKL_FLAGS=-m64 -w -I"/home/kunal/intel/mkl/include"
+INTEL_PATH=/local/scratch/a/das160/intel/oneapi
+MKL_FLAGS=-m64 -w -I"/local/scratch/a/das160/intel/oneapi/mkl/latest/include"
 
 include ../config.mk
-CC = icpc
+CC = /local/scratch/a/das160/intel/oneapi/compiler/latest/bin/icpx
 NVCC = nvcc
 
 arch=intel64
 ifeq ($(hasMIC), 2)
 arch=mic
 endif
-MKL_LDFLAGS=-Wl,--start-group "$(INTEL_PATH)/mkl/lib/$(arch)/libmkl_intel_lp64.a" "$(INTEL_PATH)/mkl/lib/$(arch)/libmkl_intel_thread.a" "$(INTEL_PATH)/mkl/lib/$(arch)/libmkl_core.a" -Wl,--end-group -lpthread -lm 
-#MKL_LDFLAGS=-Wl,--start-group "$(INTEL_PATH)/mkl/lib/$(arch)/libmkl_intel_lp64.a" "$(INTEL_PATH)/mkl/lib/$(arch)/libmkl_intel_thread.a" "$(INTEL_PATH)/mkl/lib/$(arch)/libmkl_core.a" -Wl,--end-group -lpthread -lm -I/opt/software/papi/5.4.1/include -L/opt/software/papi/5.4.1/lib -lpapi 
+MKL_LDFLAGS=-Wl,--start-group "$(INTEL_PATH)/mkl/latest/lib/$(arch)/libmkl_intel_lp64.a" "$(INTEL_PATH)/mkl/latest/lib/$(arch)/libmkl_intel_thread.a" "$(INTEL_PATH)/mkl/latest/lib/$(arch)/libmkl_core.a" -Wl,--end-group -lpthread -lm 
+#MKL_LDFLAGS=-Wl,--start-group "$(INTEL_PATH)/mkl/latest/lib/$(arch)/libmkl_intel_lp64.a" "$(INTEL_PATH)/mkl/lib/$(arch)/libmkl_intel_thread.a" "$(INTEL_PATH)/mkl/lib/$(arch)/libmkl_core.a" -Wl,--end-group -lpthread -lm -I/opt/software/papi/5.4.1/include -L/opt/software/papi/5.4.1/lib -lpapi 
 
 GPERF_HOME=/home/niuq/tools/gperftools-2.1/build
 GPERF_FLAGS=-I$(GPERF_HOME)/include
@@ -18,7 +18,7 @@ GPERF_LDFLAGS=$(GPERF_HOME)/lib/libprofiler.a $(GPERF_HOME)/lib/libtcmalloc.a
 
 # What optimization level to use
 #OPTFLAGS = -fast -openmp
-OPTFLAGS = -O3 -qopenmp -vec-report1 -restrict -pthread #-Dprofiling #-DAGGR
+OPTFLAGS = -O3 -qopenmp -restrict -pthread #-Dprofiling #-DAGGR
 
 LIBDIR=nlibs
 LIBNAME=libnrmcl.a
